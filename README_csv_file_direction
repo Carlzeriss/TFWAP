@@ -1,0 +1,81 @@
+"""
+author : James Thanatat
+"""
+"""
+CSV file direction
+***NOTE: index always starts from  zero***
+
+1) Part-cell relation csv file
+(2-D array, shape = (1 x num_part): index = part_index and value = cell_index)
+  - for instance: 7 part with 2 cell
+  [0,0,0,1,1,1,1]
+  indicate cell 0 includes part (0,1,2)
+           cell 1 includes part (3,4,5,6)
+
+2) Part-task relation csv file
+(2-D array, shape = (1 x num_part) : index = part_index and value = task_index)
+- for instance: 7 part with 5 task
+  [0,1,2,2,3,3,4]
+  indicate task 0 includes part (0)
+           task 1 includes part (1)
+           task 2 includes part (2,3)
+           task 3 includes part (4,5)
+           task 4 includes part (6)
+
+3) Sociometry matrix csv file
+2-D array, shape = (num_worker x num_worker) : index = (worker i, worker j) and value = sociometry_score)
+- for instance: 5 worker x 5 worker
+  [[0,5,4,1,1],[0,0,3,1,1],[0,0,0,1,1],[0,0,0,0,3],[0,0,0,0,0]]
+  sociometry_score has only one value for each worker in pair and does not count for him/herself score
+  indicate w0,w1 sociometry_score = 5
+           w0,w2 sociometry_score = 4
+           w0,w3 sociometry_score = 1
+           w0,w4 sociometry_score = 1
+           w1,w2 sociometry_score = 3
+           w1,w3 sociometry_score = 1
+           w1,w4 sociometry_score = 1
+           w2,w3 sociometry_score = 1
+           w2,w4 sociometry_score = 1
+           w3,w4 sociometry_score = 3
+
+4) Demand matrix csv file
+(2-D array, shape = (num_part x 1 ) : index = (part_index) and value = part_demand)
+- for instance: 7 part x 4 period
+[[1],[2],[3],[0],[5],[1],[0]]
+indicate p0 demand = 1
+         p1 demand = 2 
+         p2 demand = 3
+         p3 demand = 0
+         p4 demand = 5
+         p5 demand = 1
+         p6 demand = 0
+
+5) part standard processing time csv file
+(2-D array, shape = (num_part x 1) : index = (part_index) and value = processing_time)
+- for instance: 7 part
+[[1],[2],[3],[0],[5],[1],[0]]
+indicate p0 processing_time = 1
+         p1 processing_time = 2
+         p2 processing_time = 3
+         p3 processing_time = 1
+         p4 processing_time = 5
+         p5 processing_time = 1
+         p6 processing_time = 0
+
+6) worker part skill-coefficient matrix csv file
+(2-D array, shape = (num_worker x num_part) : index = (worker_index, part_index) and value = skill_coefficient)
+- for instance: 2 worker x 5 part
+[[0.7,1,1,1,1],[1,1,1,1.3,1.3]]
+indicate w0 skill coefficeint of part 0 =  0.7
+         w0 skill coefficeint of part 1 =  1
+         w0 skill coefficeint of part 2 =  1
+         w0 skill coefficeint of part 3 =  1
+         w0 skill coefficeint of part 4 =  1
+          w1 skill coefficeint of part 0 =  1
+          w1 skill coefficeint of part 1 =  1
+          w1 skill coefficeint of part 2 =  1
+          w1 skill coefficeint of part 3 =  1.3
+          w1 skill coefficeint of part 4 =  1.3
+
+7) worker task skill-coefficient matrix csv file
+--> Similar to 6)
